@@ -93,7 +93,7 @@ $(document).ready(function(){
 			var formData = new FormData($(this)[0]);
 			formData.append("action","insertOrUpdate");	
 			$.ajax({
-				url: "../mfriend/controller/login_controller.php",
+				url: "../friends/controller/login_controller.php",
 				type: 'POST',
 				data: formData,
 				async: false,
@@ -105,7 +105,7 @@ $(document).ready(function(){
 					var result = JSON.parse(data);
 					// alert(result.loginStatus);
 					if ($.trim(result.loginStatus) == 'yes') {						
-						window.location.assign("../mfriend/layout.php")
+						window.location.assign("../friends/layout.php")
 					}else if($.trim(result.loginStatus) == 'no') {
 						alert('wrong user or password');
 					}

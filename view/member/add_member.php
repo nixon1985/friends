@@ -71,7 +71,7 @@
 					<div class="form-group"> 
 						<label class="col-sm-2 control-label">Photo</label> 
 						<div class="col-sm-10"> 
-							<input type="file" class="filestyle" data-icon="false" data-classButton="btn btn-default" data-classInput="form-control inline input-s">
+							<input type="file" class="filestyle" name="photo" data-icon="false" data-classButton="btn btn-default" data-classInput="form-control inline input-s">
 						</div> 
 					</div> 
 				 
@@ -246,7 +246,7 @@ $(document).ready(function(){
 			var salary_month = $('#month_no').val();
 			formData.append("action","insertOrUpdate");	
 			$.ajax({
-				url: "../mfriend/controller/add_member_controller.php",
+				url: "../friends/controller/add_member_controller.php",
 				type: 'POST',
 				data: formData,
 				async: false,

@@ -44,6 +44,28 @@
 		function getFinId(){
 			return $this->finId;
 		}
+
+
+        function getNewMemberNo(){
+
+            $newMemberId = "";
+
+            /*Get Max Voucher ID*/
+            $sql_query = "SELECT IFNULL(max(member_no)+1,10001) member_no from member_info";
+
+            $stmt = $this->dbCon->prepare($sql_query);
+            //$stmt->execute(array(':company_id'=>$this->comId,':vm_fin_year'=>$this->finId,':vmonth'=>$vmonth,':vyear'=>$vyear));
+            $newMemberNo = $stmt->fetch(PDO::FETCH_ASSOC);
+            if(isset($newMemberNo['member_no'])){
+                $newMemberId   = $newMemberNo['member_no'];
+            }else{
+                $newMemberId = "10001";
+            }
+            return $newMemberId;
+        }
+
+
+
 		
 		function getComWiseFinId($comId){
 			$sql_query = "SELECT fy_id from acc_fin_year WHERE fy_comid = '$comId' AND '".date("Y-m-d")."' BETWEEN  fy_start_dt AND fy_end_date";

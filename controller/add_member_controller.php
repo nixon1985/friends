@@ -3,9 +3,9 @@
 include("DBcontroller.php");
 $obj 		= new DBcontroller;	
 $conn       = $obj->getDbConn();
-
+$newMemberNo = $obj->getNewMemberNo();
 try {
-        photo_uplaod();
+        photo_uplaod($newMemberNo);
         $conn->beginTransaction();
 		$sql_query = "INSERT INTO member_info (member_name,phone_no,email,present_address,permanent_address) VALUES (:member_name,:phone_no,:email,:present_address,:permanent_address)";
 		$stmt = $conn->prepare($sql_query);
@@ -36,9 +36,9 @@ try {
 	}
 
 
-	function photo_uplaod(){
+	function photo_uplaod($newMemberNo){
 
-        $target_dir = "uploads/"; // specify the directory where you want to store the uploaded files
+        $target_dir = "../uploads/"; // specify the directory where you want to store the uploaded files
         $target_file = $target_dir . basename($_FILES["photo"]["name"]);
         $uploadOk = 1;
         $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
@@ -79,7 +79,11 @@ try {
             echo "Sorry, your file was not uploaded.";
         // if everything is ok, try to upload file
         } else {
+            //$newname = '../uploads/'.$newMemberNo.'.'.$imageFileType;
             if (move_uploaded_file($_FILES["photo"]["tmp_name"], $target_file)) {
+
+            //if (move_uploaded_file($_FILES["photo"]["tmp_name"], $newMemberNo)) {
+                // rename("/test/file1.txt","/home/docs/my_file.txt");
                 echo "The file ". htmlspecialchars( basename( $_FILES["photo"]["name"])). " has been uploaded.";
             } else {
                 echo "Sorry, there was an error uploading your file.";

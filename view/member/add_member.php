@@ -56,8 +56,8 @@
 					<div class="form-group"> 
 						<label class="col-sm-2 control-label">Gender</label> 
 						<div class="col-sm-10"> 
-							<label class="checkbox-inline"> <input type="radio" name="optionsRadios" id="optionsRadios1" value="Male" checked> Male </label>
-							<label class="checkbox-inline"> <input type="radio" name="optionsRadios" id="optionsRadios2" value="Female"> Female </label> 
+							<label class="checkbox-inline"> <input type="radio" name="gender" id="gender1" value="Male" checked> Male </label>
+							<label class="checkbox-inline"> <input type="radio" name="gender" id="gender2" value="Female"> Female </label>
 						</div> 
 					</div>
 
@@ -230,8 +230,9 @@ $(document).ready(function(){
 	/*Submit Button Action Performed*/
 	$("form#submit_form").submit(function(event) {
 		alert($.trim($('#member_name').val()).length);
-		
-		if($.trim($('#member_name').val()).length==0 ){
+        var gender = $('input[name="gender"]:checked').val();
+
+        if($.trim($('#member_name').val()).length==0 ){
 			alert('Please Enter Member Name');
 			return false;
 		}
@@ -242,10 +243,9 @@ $(document).ready(function(){
 			$('#btnSubmit').prop('disabled',true);			
 			event.preventDefault();
 			var formData = new FormData($(this)[0]);
-			var salary_year = $('#year_no').val();
-			var salary_month = $('#month_no').val();
-			formData.append("action","insertOrUpdate");	
-			$.ajax({
+			formData.append("action","insertOrUpdate");
+            formData.append("gender",gender);
+            $.ajax({
 				url: "../friends/controller/add_member_controller.php",
 				type: 'POST',
 				data: formData,
@@ -257,24 +257,14 @@ $(document).ready(function(){
 					//$('#btnSubmit').prop('disabled',false);	
 					
 					var result = JSON.parse(data);
-					alert(result.success);
-					if ($.trim(result.msg) === '1') {						
-						clearForm();
-						alert("Salary Sheet Created Successfully.");
+
+					if (result.success) {
+                        document.getElementById("submit_form").reset();
+						alert("New Member Created Successfully.");
 					}
-					else if ($.trim(result.msg) === '2') {						
-						clearForm();
+					else if (result.error) {
+						//clearForm();
 						alert("Salary Sheet Updated Successfully.");
-					}
-					else if ($.trim(result.msg) === '3') {						
-						alert("Salary Sheet has been generated already. You can not edit. check the month and year carefully ");
-					}
-					else if ($.trim(result.msg) === '4') {						
-						clearForm();
-						alert("Bonus Sheet Generated Successfully.");
-					}
-					else if($.trim(result.msg) === 'EE') {
-						alert(result.errorDesc);
 					}
 				}
 			});

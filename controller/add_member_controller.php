@@ -7,8 +7,8 @@ $newMemberNo = $obj->getNewMemberNo();
 try {
         $photoPath = photo_uplaod($newMemberNo);
         $conn->beginTransaction();
-		$sql_query = "INSERT INTO member_info (member_no,member_name,phone_no,email,gender,present_address,permanent_address,photo_path) 
-                                       VALUES (:member_no,:member_name,:phone_no,:email,:gender,:present_address,:permanent_address,:photo_path)";
+		$sql_query = "INSERT INTO member_info (member_no,member_name,phone_no,email,gender,present_address,permanent_address,monthly_payable,opening_balance,photo_path) 
+                                       VALUES (:member_no,:member_name,:phone_no,:email,:gender,:present_address,:permanent_address,:monthly_payable,:opening_balance,:photo_path)";
 		$stmt = $conn->prepare($sql_query);
 
         $stmt->bindParam(':member_no', $newMemberNo);
@@ -18,6 +18,8 @@ try {
         $stmt->bindParam(':gender', $gender);
 		$stmt->bindParam(':present_address', $present_address);
 		$stmt->bindParam(':permanent_address', $permanent_address,PDO::PARAM_NULL);
+        $stmt->bindParam(':monthly_payable', $monthly_payable);
+        $stmt->bindParam(':opening_balance', $opening_balance);
         $stmt->bindParam(':photo_path', $photoPath);
 		// $stmt->bindParam(':description', $description,PDO::PARAM_NULL);
 		// $stmt->bindParam(':created_by', $created_by);
@@ -28,8 +30,8 @@ try {
         $gender 	      	  = trim($_POST['gender']);
 		$present_address 	  = trim($_POST['present_address']);
 		$permanent_address 	  = trim($_POST['permanent_address']);
-		// $duration 	          = (!empty($_POST['duration'])) ? trim($_POST['duration']):null;
-		// $description 	      = (!empty($_POST['allow_desc'])) ? trim($_POST['allow_desc']):null;
+		$monthly_payable 	  = (!empty($_POST['monthly_payable'])) ? trim($_POST['monthly_payable']):0;
+		$opening_balance 	  = (!empty($_POST['opening_balance'])) ? trim($_POST['opening_balance']):0;
 		// $created_by 	      = $loginUser;
 		
 		$stmt->execute();
@@ -96,6 +98,28 @@ try {
             }
         }
         return $returnPath;
+
+    }
+
+    function userCreate($userID){
+        $conn->beginTransaction();
+        $sql_query = "INSERT INTO appuser (user_id,user_name,user_password,user_level,is_active) 
+                                       VALUES (:user_id,:user_name,:user_password,:user_level,:is_active)";
+        $stmt = $conn->prepare($sql_query);
+
+        $stmt->bindParam(':user_id', $userID);
+        $stmt->bindParam(':user_name', $userID);
+        $stmt->bindParam(':user_password', $user_password);
+        $stmt->bindParam(':user_level', $user_level);
+        // $stmt->bindParam(':login_status', $login_status);
+        $stmt->bindParam(':is_active', $is_active);
+
+        $user_password 	      = md5(123456);
+        $user_level 	  	  = trim('USER');
+        $is_active 	      	  = trim(1);
+
+        $stmt->execute();
+        $conn->commit();
 
     }
 

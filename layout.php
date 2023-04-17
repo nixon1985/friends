@@ -78,7 +78,9 @@ if(!isset($_SESSION['user_id']) && $_SESSION['user_id'] == true) {
 		</section> 
 	</section> 
 </section> <!-- Bootstrap --> <!-- App --> 
-<script src="js/app.v1.js"></script> 
+<script src="js/app.v1.js"></script>
+<script src="js/parsley/parsley.min.js"></script>
+<script src="js/parsley/parsley.extend.js"></script>
 <script src="js/app.plugin.js"></script>
 
 <!-- Mirrored from flatfull.com/themes/note/buttons.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 04 Jan 2023 10:00:23 GMT -->

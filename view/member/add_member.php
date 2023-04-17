@@ -1,5 +1,4 @@
 
-
 <ul class="breadcrumb no-border no-radius b-b b-light pull-in"> 
 	<li><a href="index.html"><i class="fa fa-home"></i> Home</a></li> 
 	<li><a href="#">Member</a></li> 
@@ -8,7 +7,7 @@
 
 
 
-<form id="submit_form" class="bs-example"> 
+<form id="submit_form" class="bs-example" role="search">
 <div class="m-b-md"><h3 class="m-b-none">Member Registration</h3> </div> 
 
 
@@ -20,15 +19,15 @@
 				
 					<div class="form-group"> 
 						<label class="col-sm-2 control-label">Name</label> 
-						<div class="col-sm-10"> 
-							<input type="text" id="member_name" name="member_name" class="form-control"> 
+						<div class="col-sm-10">
+							<input type="text" id="member_name" name="member_name" class="form-control" data-required="true">
 						</div> 
 					</div>
 					
 					<div class="form-group"> 
 						<label class="col-sm-2 control-label">Phone</label> 
 						<div class="col-sm-10"> 
-							<input type="text" id="phone_no" name="phone_no" class="form-control">
+							<input type="text" id="phone_no" name="phone_no" class="form-control" data-required="true">
 						</div> 
 					</div>
 					
@@ -139,14 +138,14 @@
 		<div class="form-group"> 
 			<label class="col-sm-2 control-label">Monthly Payable Amount</label> 
 			<div class="col-sm-10"> 
-				<input type="text" class="form-control">  
+				<input type="text" id="monthly_payable" name="monthly_payable" class="form-control">
 			</div> 
 		</div> 
 		
 		<div class="form-group"> 
 			<label class="col-sm-2 control-label">Current Balance</label> 
 			<div class="col-sm-10"> 
-				<input type="text" class="form-control">  
+				<input type="text" id="opening_balance" name="opening_balance" class="form-control">
 			</div> 
 		</div>
 		<div class="line line-lg pull-in"></div> 
@@ -344,6 +343,8 @@ $(document).ready(function(){
 		
 	clearForm();
 });
+
+
 </script>
 
 

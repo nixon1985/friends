@@ -3,9 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="48cbd7bd-d452-4e6c-8393-2e59c5407c82" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/DBcontroller.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/DBcontroller.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controller/add_member_controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/add_member_controller.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/profilePhoto.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/layout.php" beforeDir="false" afterPath="$PROJECT_DIR$/layout.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/view/member/add_member.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/member/add_member.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -41,7 +40,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1681359876953</updated>
-      <workItem from="1681359886405" duration="40883000" />
+      <workItem from="1681359886405" duration="53031000" />
     </task>
     <servers />
   </component>

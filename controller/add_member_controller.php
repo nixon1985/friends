@@ -36,6 +36,7 @@ try {
 		
 		$stmt->execute();
 		$conn->commit();
+        userCreate($newMemberNo,$conn);
 		$data['success']='New Member added successfully';
         echo json_encode($data);
 
@@ -101,7 +102,7 @@ try {
 
     }
 
-    function userCreate($userID){
+    function userCreate($userID,$conn){
         $conn->beginTransaction();
         $sql_query = "INSERT INTO appuser (user_id,user_name,user_password,user_level,is_active) 
                                        VALUES (:user_id,:user_name,:user_password,:user_level,:is_active)";

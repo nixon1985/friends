@@ -11,21 +11,33 @@
 <div class="m-b-md"> <h3 class="m-b-none">Member List</h3> </div> 
 <section class="panel panel-default"> 
 	<header class="panel-heading"> Members Information <i class="fa fa-info-sign text-muted" data-toggle="tooltip" data-placement="bottom" data-title="ajax to load the data."></i> </header> 
-	<div class="table-responsive"> 
-		<table class="table table-striped m-b-none"> 
-			<thead> 
-				<tr> <th width="20%">Name</th> <th width="25%">Phone</th> <th width="25%">Email</th> <th width="15%">Status</th> <th width="15%">Action</th> </tr> 
-			</thead>
-			<tbody> </tbody> 
-		</table> 
-	</div> 
+
+    <div class="table-responsive">
+        <table id="member_grid" class="table table-striped b-t b-light">
+            <thead>
+                <tr>
+                    <th class="th-sortable" data-toggle="class">Project <span class="th-sort"> <i class="fa fa-sort-down text"></i> <i class="fa fa-sort-up text-active"></i> <i class="fa fa-sort"></i> </span> </th>
+                    <th>Task</th>
+                    <th>Date</th>
+                    <th width="30"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Idrawfast</td>
+                    <td>4c</td>
+                    <td>Jul 25, 2013</td>
+                    <td> <a href="#" class="active" data-toggle="class"><i class="fa fa-check text-success text-active"></i><i class="fa fa-times text-danger text"></i></a> </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
 </section> 
 
 <div id="panel_view"></div>
 
-<!-- datatables --><script src="js/datatables/jquery.dataTables.min.js"></script>
-<script src="js/datatables/demo.js"></script> 
-<!--script src="js/app.plugin.js"></script -->
+
 
 <script type="text/javascript">
 	
@@ -50,8 +62,9 @@
 				success: function(data) { 
 					// $('#member_grid').html(data);
 					$.each(data.records, function(i,data){
+					    alert(data.present_address);
 						html += "<tr>";				
-						html +="<td align='center' class='id'>"+data.id+"</td>";
+						html +="<td align='center' class='id'>"+data.member_no+"</td>";
 						html +="<td align='center' class='installment_no'>"+data.member_name+"</td>";
 						html +="<td class='pay_type'>"+data.phone+"</td>";
 						html +="<td align='right' class='payable'>"+data.email+"</td>";
@@ -60,7 +73,7 @@
 					});				
 				}
 			});
-		$('.table tbody').append(html);	
+		$('#member_grid tbody').append(html);
 	}
 	
 	

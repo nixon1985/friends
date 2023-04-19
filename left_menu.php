@@ -24,8 +24,10 @@
 								<span class="pull-right"> <i class="fa fa-angle-down text"></i> <i class="fa fa-angle-up text-active"></i> </span> 
 								<span>Registration</span> 
 							</a> 
-							<ul class="nav lt"> 
-								<li> <a href="#" onclick='openpage("view/member/add_member.php");' > <i class="fa fa-angle-right"></i> <span>Add Member</span> </a> </li> 
+							<ul class="nav lt">
+                                <?php if($_SESSION['user_level']=='ADMIN'){?>
+								<li> <a href="#" onclick='openpage("view/member/add_member.php");' > <i class="fa fa-angle-right"></i> <span>Add Member</span> </a> </li>
+                                <?php } ?>
 								<li> <a href="#" onclick='openpage("view/member/member_list.php");'> <i class="fa fa-angle-right"></i> <span>Member List</span> </a> </li> 
 							</ul> 
 						</li> 

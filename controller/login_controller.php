@@ -12,7 +12,8 @@
 
 		
 		if(!empty($user_name) && !empty($user_pass)){			
-			$stmt = $conn->prepare("SELECT * FROM appuser u, member_info m WHERE u.user_name=:user_id AND u.user_password=:user_password and m.member_no=u.user_id LIMIT 1");
+			// $stmt = $conn->prepare("SELECT * FROM appuser u, member_info m WHERE u.user_name=:user_id AND u.user_password=:user_password and m.member_no=u.user_id LIMIT 1");
+            $stmt = $conn->prepare("SELECT * FROM appuser u LEFT JOIN member_info m ON m.member_no=u.user_id WHERE u.user_name=:user_id AND u.user_password=:user_password LIMIT 1");
 			$stmt->execute(array(':user_id'=>trim($user_name), ':user_password'=>md5(trim($user_pass))));
 			$userInfo = $stmt->fetch(PDO::FETCH_ASSOC);
 			

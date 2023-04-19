@@ -16,20 +16,16 @@
         <table id="member_grid" class="table table-striped b-t b-light">
             <thead>
                 <tr>
-                    <th class="th-sortable" data-toggle="class">Project <span class="th-sort"> <i class="fa fa-sort-down text"></i> <i class="fa fa-sort-up text-active"></i> <i class="fa fa-sort"></i> </span> </th>
-                    <th>Task</th>
-                    <th>Date</th>
-                    <th width="30"></th>
+                    <th class="th-sortable" data-toggle="class">Member ID <span class="th-sort"> <i class="fa fa-sort-down text"></i> <i class="fa fa-sort-up text-active"></i> <i class="fa fa-sort"></i> </span> </th>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>Present Address</th>
+                    <th>Monthly Payable</th>
+                    <th>Opening Balance</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>Idrawfast</td>
-                    <td>4c</td>
-                    <td>Jul 25, 2013</td>
-                    <td> <a href="#" class="active" data-toggle="class"><i class="fa fa-check text-success text-active"></i><i class="fa fa-times text-danger text"></i></a> </td>
-                </tr>
-            </tbody>
+            <tbody></tbody>
         </table>
     </div>
 
@@ -40,16 +36,15 @@
 
 
 <script type="text/javascript">
-	
+/*
 	$(document).ready(function(){
 		loadDataGrid();
-	})
-	
-	
+	});
+*/
+    loadDataGrid();
 	function loadDataGrid(){
-		alert('sdfsdf');
 		var formData='erer';
-		$('.table tbody tr').remove();
+		//$('.table tbody tr').remove();
 		var html = "";
 			$.ajax({
 				url: 'controller/infos.php',
@@ -61,68 +56,24 @@
 				processData: false,
 				success: function(data) { 
 					// $('#member_grid').html(data);
-					$.each(data.records, function(i,data){
-					    alert(data.present_address);
+                    var result = JSON.parse(data);
+					$.each(result, function(i,data){
 						html += "<tr>";				
 						html +="<td align='center' class='id'>"+data.member_no+"</td>";
 						html +="<td align='center' class='installment_no'>"+data.member_name+"</td>";
-						html +="<td class='pay_type'>"+data.phone+"</td>";
+						html +="<td class='pay_type'>"+data.phone_no+"</td>";
 						html +="<td align='right' class='payable'>"+data.email+"</td>";
 						html +="<td class='payment_date' align='center'>"+data.present_address+"</td>";
+                        html +="<td class='payment_date' align='center'>"+data.monthly_payable+"</td>";
+                        html +="<td class='payment_date' align='center'>"+data.opening_balance+"</td>";
 						html += '</tr>';
 					});				
 				}
 			});
-		$('#member_grid tbody').append(html);
+		$('#member_grid tbody').html(html);
 	}
 	
-	
-	/*
-	function loadGrid(bookingId){
-	var url = "./controller/sales_market/pm_schedule_controller.php?action=viewData&bookingId="+bookingId;
-	$.getJSON(url,function(data){	
-		
-			if(!jQuery.isEmptyObject(data.records)){
-				$('#filter_table tbody tr').remove();
-				var html = "";
-				$.each(data.records, function(i,data){
-					html += "<tr>";				
-					html +="<td align='center' class='id'>"+data.id+"</td>";
-					html +="<td align='center' class='installment_no'>"+data.installment_no+"</td>";
-					html +="<td class='pay_type'>"+data.pay_type+"</td>";
-					html +="<td align='right' class='payable'>"+data.payable+"</td>";
-					html +="<td class='payment_date' align='center'>"+data.payment_date+"</td>";
-					
-					html += '</tr>';
-				});				
-				
-				$('#filter_table tbody').append(html);
-				
-				var options = {
-					valueNames: ['payable','pay_type','payment_date']
-				};			
-				
-				var userList = new List('recordsfilter', options);
-				
-				
-				$('#filter_table >tbody > tr').dblclick(function(){						
-					var record_id = $(this).find('td:eq(0)').text();		
-					var url="./controller/sales_market/pm_schedule_controller.php?action=getInfo&record_id="+record_id;
-					$.getJSON(url,function(data){
-						if(!jQuery.isEmptyObject(data.schInfo)){
-							$.each(data.schInfo, function(i,data){
-								$("#temp_id").val(data.id); 							
-								$("#payment_tp option[value='"+data.paymentTp+"']").attr('selected','selected');
-								$("#installment_no").val(data.installment_no); 
-								$("#payable_amount").val(data.payable); 
-								$("#payable_date").val(data.payment_date);
-							});			
-						}					
-					});				
-				});
-			}			  
-		});
-	}*/
+
 	
 	</script>
 

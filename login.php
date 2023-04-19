@@ -23,7 +23,7 @@ if(isset($_SESSION['user_id']) && $_SESSION['user_id'] == true) {
 <body class=""> 
 	<section id="content" class="m-t-lg wrapper-md animated fadeInUp"> 
 		<div class="container aside-xxl"> 
-			<a class="navbar-brand block" href="index.html">Notebook</a> 
+			<a class="navbar-brand block" href="#">Friends-98 Multipurpose Association</a>
 			<section class="panel panel-default bg-white m-t-lg"> 
 				<header class="panel-heading text-center"> <strong>Sign in</strong> </header> 
 				<form id="login_form" action="#" class="panel-body wrapper-lg"> 
@@ -47,7 +47,7 @@ if(isset($_SESSION['user_id']) && $_SESSION['user_id'] == true) {
 	</section> <!-- footer --> 
 	
 	<footer id="footer"> 
-		<div class="text-center padder"> <p> <small>Web app framework base on Bootstrap<br>&copy; 2023</small> </p> </div> 
+		<div class="text-center padder"> <p> <small>Developed by Nixon Khan<br>&copy; 2023</small> </p> </div>
 	</footer> <!-- / footer --> <!-- Bootstrap --> <!-- App --> 
 	<script src="js/app.v1.js"></script> <script src="js/app.plugin.js"></script>
 </body>

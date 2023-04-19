@@ -63,7 +63,7 @@
 					<div class="form-group"> 
 						<label class="col-sm-2 control-label">Joining Date</label> 
 						<div class="col-sm-10"> 
-							<input class="input-sm input-s datepicker-input form-control" size="16" type="text" value="12-02-2013" data-date-format="dd-mm-yyyy" >
+							<input class="input-sm input-s datepicker-input form-control" size="16" type="text" value="" data-date-format="dd-mm-yyyy" >
 						</div> 
 					</div>
  
@@ -151,7 +151,7 @@
 		<div class="line line-lg pull-in"></div> 
 		<div class="form-group"> 
 			<div class="col-sm-10" align="center"> 
-				<a href="#modal-form" class="btn btn-success" data-toggle="modal">Form in a modal</a>
+				<!--<a href="#modal-form" class="btn btn-success" data-toggle="modal">Form in a modal</a>-->
 				<button type="submit" id="btnClear" class="btn btn-default">Cancel</button> 
 				<button type="submit" class="btn btn-primary">Submit</button>  
 			</div> 
@@ -228,17 +228,22 @@ $(document).ready(function(){
 	
 	/*Submit Button Action Performed*/
 	$("form#submit_form").submit(function(event) {
-		alert($.trim($('#member_name').val()).length);
         var gender = $('input[name="gender"]:checked').val();
 
         if($.trim($('#member_name').val()).length==0 ){
 			alert('Please Enter Member Name');
 			return false;
-		}
-		else {
-			//alert('save mode');
-			//return false;
-			
+		}else if($.trim($('#phone_no').val()).length==0 ){
+            alert('Please Enter Phone Number');
+            return false;
+        }else if($.trim($('#monthly_payable').val()).length==0 ) {
+            alert('Please Enter monthly payable amount');
+            return false;
+        }else if($.trim($('#opening_balance').val()).length==0 ){
+                alert('Please Enter current balance');
+                return false;
+        } else {
+
 			$('#btnSubmit').prop('disabled',true);			
 			event.preventDefault();
 			var formData = new FormData($(this)[0]);

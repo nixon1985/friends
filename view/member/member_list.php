@@ -23,6 +23,7 @@
                     <th>Present Address</th>
                     <th>Monthly Payable</th>
                     <th>Opening Balance</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody></tbody>
@@ -58,15 +59,16 @@
 					// $('#member_grid').html(data);
                     var result = JSON.parse(data);
 					$.each(result, function(i,data){
-						html += "<tr>";				
+						html +="<tr>";
 						html +="<td align='center' class='id'>"+data.member_no+"</td>";
 						html +="<td align='center' class='installment_no'>"+data.member_name+"</td>";
 						html +="<td class='pay_type'>"+data.phone_no+"</td>";
 						html +="<td align='right' class='payable'>"+data.email+"</td>";
 						html +="<td class='payment_date' align='center'>"+data.present_address+"</td>";
-                        html +="<td class='payment_date' align='center'>"+data.monthly_payable+"</td>";
-                        html +="<td class='payment_date' align='center'>"+data.opening_balance+"</td>";
-						html += '</tr>';
+                        html +="<td class='payment_date' align='right'>"+data.monthly_payable+"</td>";
+                        html +="<td class='payment_date' align='right'>"+data.opening_balance+"</td>";
+                        html +='<td class="payment_date" align="center"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-pencil"></i></a></td>';
+						html +='</tr>';
 					});				
 				}
 			});

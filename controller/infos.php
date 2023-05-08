@@ -20,20 +20,25 @@ $conn       = $obj->getDbConn();
 //$row1 = mysql_fetch_array($result);
 //echo json_encode($row1);
 
+$actionType = $_POST['actionType'];
+echo $_POST['actionType'];
+switch ($actionType){
 
+    case 'personInfo':
+        $member_id = $_POST['member_id'];
+        $sql = "SELECT * FROM member_info WHERE member_id = $member_id";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        $opInfo = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        break;
 
-$sql = "SELECT * FROM member_info";
-$stmt = $conn->prepare($sql);
-$stmt->execute();
-$opInfo = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-/*
-if($opInfo){
-    foreach ($opInfo as $row){
-        $openning_balance = $row['o_debit']-$row['o_credit'];
-    }
+    case 'getAllMembers':
+        $sql = "SELECT * FROM member_info";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        $opInfo = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        break;
 }
-*/
 
 echo json_encode($opInfo);
 

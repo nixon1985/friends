@@ -213,7 +213,6 @@
     loadDataGrid();
 	function loadDataGrid(){
         var postData = {actionType:'getAllMembers'};
-
 		//$('.table tbody tr').remove();
 		var html = "";
 			$.ajax({
@@ -236,7 +235,7 @@
 						html +="<td class='payment_date' align='center'>"+data.present_address+"</td>";
                         html +="<td class='payment_date' align='right'>"+data.monthly_payable+"</td>";
                         html +="<td class='payment_date' align='right'>"+data.opening_balance+"</td>";
-                        html +='<td class="payment_date" align="center"><a href="javascript:editMember('+data.member_no+');"><i class="fa fa-pencil"></i></a></td>';
+                        html +='<td class="payment_date" align="center"><a href="javascript:editMember('+data.member_id+');"><i class="fa fa-pencil"></i></a></td>';
 						html +='</tr>';
 					});				
 				}
@@ -246,41 +245,33 @@
 
 	function editMember(memberID){
 
-        var data = {
-            actionType:'personInfo',
-            member_id: memberID
-        };
-
-        $.ajax({
-            url: 'controller/infos.php',
-            type: 'POST',
-            data: JSON.stringify(data),
-            async: false,
-            cache: false,
-            contentType: false,
-            processData: false,
-            success: function(data) {
-                // $('#member_grid').html(data);
-                var result = JSON.parse(data);
-                $.each(result, function(i,data){
-                    /*
-                    html +="<tr>";
-                    html +="<td align='center' class='id'>"+data.member_no+"</td>";
-                    html +="<td align='center' class='installment_no'>"+data.member_name+"</td>";
-                    html +="<td class='pay_type'>"+data.phone_no+"</td>";
-                    html +="<td align='right' class='payable'>"+data.email+"</td>";
-                    html +="<td class='payment_date' align='center'>"+data.present_address+"</td>";
-                    html +="<td class='payment_date' align='right'>"+data.monthly_payable+"</td>";
-                    html +="<td class='payment_date' align='right'>"+data.opening_balance+"</td>";
-                    html +='<td class="payment_date" align="center"><a href="javascript:editMember();"><i class="fa fa-pencil"></i></a></td>';
-                    html +='</tr>';
-                     */
-                });
-            }
+        $.post("controller/infos.php", {actionType: "personInfo", member_id: memberID}, function(data, status){
+            var result = JSON.stringify(data);
+            alert("Data: " + data+ "\nStatus: " + status);
+            $('#modal-form').modal('show');
         });
 
 
-        $('#modal-form').modal('show');
+        /*
+        $.ajax({
+            url: 'controller/infos.php',
+            type: 'POST',
+            data: data,
+            dataType: "json",
+            async: false,
+            cache: false,
+            contentType: "application/json; charset=utf-8",
+            processData: false,
+            success: function(data) {
+                var result = JSON.parse(data);
+                $.each(result, function(i,data){
+
+                });
+            }
+        });
+        */
+
+       // $('#modal-form').modal('show');
     }
 	
 

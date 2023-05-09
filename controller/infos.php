@@ -20,8 +20,13 @@ $conn       = $obj->getDbConn();
 //$row1 = mysql_fetch_array($result);
 //echo json_encode($row1);
 
-$actionType = $_POST['actionType'];
-echo $_POST['actionType'];
+$actionType = '';
+if(isset($_POST['actionType'])){
+    //echo $_POST['member_id'];
+    $actionType = $_POST['actionType'];
+}
+
+
 switch ($actionType){
 
     case 'personInfo':
@@ -32,7 +37,7 @@ switch ($actionType){
         $opInfo = $stmt->fetchAll(PDO::FETCH_ASSOC);
         break;
 
-    case 'getAllMembers':
+    default:
         $sql = "SELECT * FROM member_info";
         $stmt = $conn->prepare($sql);
         $stmt->execute();

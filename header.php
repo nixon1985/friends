@@ -1,18 +1,18 @@
 <header class="bg-dark dk header navbar navbar-fixed-top-xs"> 
 		<div class="navbar-header aside-md"> 
 			<a class="btn btn-link visible-xs" data-toggle="class:nav-off-screen,open" data-target="#nav,html"> <i class="fa fa-bars"></i> </a> 
-			<a href="#" class="navbar-brand" data-toggle="fullscreen"><img src="images/logo.png" class="m-r-sm">Notebook</a> 
-			<a class="btn btn-link visible-xs" data-toggle="dropdown" data-target=".nav-user"> <i class="fa fa-cog"></i> </a> 
+			<a href="#" class="navbar-brand" data-toggle="fullscreen"><img src="images/logo.png" class="m-r-sm">Friends-98</a>
+			<a class="btn btn-link visible-xs" data-toggle="dropdown" data-target=".nav-user"> <i class="fa fa-cog"></i></a>
 		</div> 
 		<ul class="nav navbar-nav hidden-xs"> 
 			<li class="dropdown"> 
 				<a href="#" class="dropdown-toggle dker" data-toggle="dropdown"> <i class="fa fa-building-o"></i> <span class="font-bold">Activity</span> </a> 
 				<section class="dropdown-menu aside-xl on animated fadeInLeft no-borders lt"> 
 					<div class="wrapper lter m-t-n-xs"> 
-						<a href="#" class="thumb pull-left m-r"> <img src="images/avatar.jpg" class="img-circle"> </a> 
+						<a href="#" class="thumb pull-left m-r"> <img src="<?php echo $_SESSION['photo_path']; ?>" class="img-circle"> </a>
 						<div class="clear">
-							<a href="#"><span class="text-white font-bold">@Mike Mcalidek</a></span> 
-							<small class="block">Art Director</small> 
+							<a href="#"><span class="text-white font-bold"><?php echo $_SESSION['member_name']; ?></a></span>
+							<small class="block"><?php echo $_SESSION['user_level']; ?></small>
 							<a href="#" class="btn btn-xs btn-success m-t-xs">Upgrade</a> 
 						</div>
 					</div> 
@@ -56,7 +56,7 @@
 						</header> 
 						<div class="list-group list-group-alt animated fadeInRight"> 
 							<a href="#" class="media list-group-item"> 
-								<span class="pull-left thumb-sm"><img src="images/avatar.jpg" alt="John said" class="img-circle"> </span> 
+								<span class="pull-left thumb-sm"><img src="<?php echo $_SESSION['photo_path']; ?>" alt="John said" class="img-circle"> </span>
 								<span class="media-body block m-b-none"> Use awesome animate.css<br> <small class="text-muted">10 minutes ago</small> </span> 
 							</a> 
 							<a href="#" class="media list-group-item"> 
@@ -89,7 +89,7 @@
 			</li> 
 			<li class="dropdown"> 
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
-					<span class="thumb-sm avatar pull-left"> <img src="images/avatar.jpg"> </span> John.Smith <b class="caret"></b> 
+					<span class="thumb-sm avatar pull-left"> <img src="<?php echo $_SESSION['photo_path'] ?>"> </span> <?php echo $_SESSION['member_name'] ?> <b class="caret"></b>
 				</a> 
 				<ul class="dropdown-menu animated fadeInRight"> 
 					<span class="arrow top"></span> 

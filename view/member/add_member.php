@@ -1,5 +1,4 @@
 
-
 <ul class="breadcrumb no-border no-radius b-b b-light pull-in"> 
 	<li><a href="index.html"><i class="fa fa-home"></i> Home</a></li> 
 	<li><a href="#">Member</a></li> 
@@ -8,7 +7,7 @@
 
 
 
-<form id="submit_form" class="bs-example"> 
+<form id="submit_form" class="bs-example" role="search">
 <div class="m-b-md"><h3 class="m-b-none">Member Registration</h3> </div> 
 
 
@@ -20,15 +19,15 @@
 				
 					<div class="form-group"> 
 						<label class="col-sm-2 control-label">Name</label> 
-						<div class="col-sm-10"> 
-							<input type="text" id="member_name" name="member_name" class="form-control"> 
+						<div class="col-sm-10">
+							<input type="text" id="member_name" name="member_name" class="form-control" data-required="true">
 						</div> 
 					</div>
 					
 					<div class="form-group"> 
 						<label class="col-sm-2 control-label">Phone</label> 
 						<div class="col-sm-10"> 
-							<input type="text" id="phone_no" name="phone_no" class="form-control">
+							<input type="text" id="phone_no" name="phone_no" class="form-control" data-required="true">
 						</div> 
 					</div>
 					
@@ -56,15 +55,15 @@
 					<div class="form-group"> 
 						<label class="col-sm-2 control-label">Gender</label> 
 						<div class="col-sm-10"> 
-							<label class="checkbox-inline"> <input type="radio" name="optionsRadios" id="optionsRadios1" value="Male" checked> Male </label>
-							<label class="checkbox-inline"> <input type="radio" name="optionsRadios" id="optionsRadios2" value="Female"> Female </label> 
+							<label class="checkbox-inline"> <input type="radio" name="gender" id="gender1" value="Male" checked> Male </label>
+							<label class="checkbox-inline"> <input type="radio" name="gender" id="gender2" value="Female"> Female </label>
 						</div> 
 					</div>
 
 					<div class="form-group"> 
 						<label class="col-sm-2 control-label">Joining Date</label> 
 						<div class="col-sm-10"> 
-							<input class="input-sm input-s datepicker-input form-control" size="16" type="text" value="12-02-2013" data-date-format="dd-mm-yyyy" >
+							<input class="input-sm input-s datepicker-input form-control" size="16" type="text" value="" data-date-format="dd-mm-yyyy" >
 						</div> 
 					</div>
  
@@ -139,20 +138,20 @@
 		<div class="form-group"> 
 			<label class="col-sm-2 control-label">Monthly Payable Amount</label> 
 			<div class="col-sm-10"> 
-				<input type="text" class="form-control">  
+				<input type="text" id="monthly_payable" name="monthly_payable" class="form-control">
 			</div> 
 		</div> 
 		
 		<div class="form-group"> 
 			<label class="col-sm-2 control-label">Current Balance</label> 
 			<div class="col-sm-10"> 
-				<input type="text" class="form-control">  
+				<input type="text" id="opening_balance" name="opening_balance" class="form-control">
 			</div> 
 		</div>
 		<div class="line line-lg pull-in"></div> 
 		<div class="form-group"> 
 			<div class="col-sm-10" align="center"> 
-				<a href="#modal-form" class="btn btn-success" data-toggle="modal">Form in a modal</a>
+				<!--<a href="#modal-form" class="btn btn-success" data-toggle="modal">Form in a modal</a>-->
 				<button type="submit" id="btnClear" class="btn btn-default">Cancel</button> 
 				<button type="submit" class="btn btn-primary">Submit</button>  
 			</div> 
@@ -229,23 +228,28 @@ $(document).ready(function(){
 	
 	/*Submit Button Action Performed*/
 	$("form#submit_form").submit(function(event) {
-		alert($.trim($('#member_name').val()).length);
-		
-		if($.trim($('#member_name').val()).length==0 ){
+        var gender = $('input[name="gender"]:checked').val();
+
+        if($.trim($('#member_name').val()).length==0 ){
 			alert('Please Enter Member Name');
 			return false;
-		}
-		else {
-			//alert('save mode');
-			//return false;
-			
+		}else if($.trim($('#phone_no').val()).length==0 ){
+            alert('Please Enter Phone Number');
+            return false;
+        }else if($.trim($('#monthly_payable').val()).length==0 ) {
+            alert('Please Enter monthly payable amount');
+            return false;
+        }else if($.trim($('#opening_balance').val()).length==0 ){
+                alert('Please Enter current balance');
+                return false;
+        } else {
+
 			$('#btnSubmit').prop('disabled',true);			
 			event.preventDefault();
 			var formData = new FormData($(this)[0]);
-			var salary_year = $('#year_no').val();
-			var salary_month = $('#month_no').val();
-			formData.append("action","insertOrUpdate");	
-			$.ajax({
+			formData.append("action","insertOrUpdate");
+            formData.append("gender",gender);
+            $.ajax({
 				url: "../friends/controller/add_member_controller.php",
 				type: 'POST',
 				data: formData,
@@ -257,24 +261,14 @@ $(document).ready(function(){
 					//$('#btnSubmit').prop('disabled',false);	
 					
 					var result = JSON.parse(data);
-					alert(result.success);
-					if ($.trim(result.msg) === '1') {						
-						clearForm();
-						alert("Salary Sheet Created Successfully.");
+
+					if (result.success) {
+                        document.getElementById("submit_form").reset();
+						alert("New Member Created Successfully.");
 					}
-					else if ($.trim(result.msg) === '2') {						
-						clearForm();
+					else if (result.error) {
+						//clearForm();
 						alert("Salary Sheet Updated Successfully.");
-					}
-					else if ($.trim(result.msg) === '3') {						
-						alert("Salary Sheet has been generated already. You can not edit. check the month and year carefully ");
-					}
-					else if ($.trim(result.msg) === '4') {						
-						clearForm();
-						alert("Bonus Sheet Generated Successfully.");
-					}
-					else if($.trim(result.msg) === 'EE') {
-						alert(result.errorDesc);
 					}
 				}
 			});
@@ -354,6 +348,8 @@ $(document).ready(function(){
 		
 	clearForm();
 });
+
+
 </script>
 
 

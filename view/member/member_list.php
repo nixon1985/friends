@@ -105,15 +105,20 @@
 
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Photo</label>
-                                        <div class="col-sm-10">
+                                        <div class="col-sm-4">
                                             <input type="file" class="filestyle" name="photo" data-icon="false" data-classButton="btn btn-default" data-classInput="form-control inline input-s">
                                         </div>
+                                        <div class="col-sm-6">
+                                            <div class="thumb-lg" id="profilePic"></div>
+                                        </div>
+
                                     </div>
 
                                 </div>
                             </section>
                         </div>
-                        <div class="col-sm-12">
+
+                        <!--<div class="col-sm-12">
                             <section class="panel panel-default form-horizontal">
                                 <header class="panel-heading font-bold">Nominee information</header>
                                 <div class="panel-body">
@@ -161,7 +166,7 @@
 
                                 </div>
                             </section>
-                        </div>
+                        </div>-->
                     </div>
 
 
@@ -246,8 +251,25 @@
 	function editMember(memberID){
 
         $.post("controller/infos.php", {actionType: "personInfo", member_id: memberID}, function(data, status){
-            var result = JSON.stringify(data);
-            alert("Data: " + data+ "\nStatus: " + status);
+            var result = JSON.parse(data);
+            alert(data);
+            $('#member_name').val(result[0].member_name);
+            $('#phone_no').val(result[0].phone_no);
+            $('#email').val(result[0].email);
+            $('#present_address').val(result[0].present_address);
+            $('#permanent_address').val(result[0].permanent_address);
+            $("input[name=gender][value="+result[0].gender+"]").prop("checked",true);
+            $('#opening_balance').val(result[0].opening_balance);
+            $('#monthly_payable').val(result[0].monthly_payable);
+            if(result[0].photo_path!=0){
+                $('#profilePic').html('<img src="'+result[0].photo_path+'" class="img-circle">');
+            }else{
+                $('#profilePic').html('');
+            }
+
+
+
+            //alert("Data: " + data+ "\nStatus: " + status);
             $('#modal-form').modal('show');
         });
 

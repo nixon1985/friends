@@ -226,7 +226,7 @@ $(document).ready(function(){
 	
 	
 	
-	/*Submit Button Action Performed*/
+	/* Submit Button Action Performed */
 	$("form#submit_form").submit(function(event) {
         var gender = $('input[name="gender"]:checked').val();
 

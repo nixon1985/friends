@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="48cbd7bd-d452-4e6c-8393-2e59c5407c82" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
 <<<<<<< HEAD
@@ -9,6 +10,9 @@
       <change beforePath="$PROJECT_DIR$/view/member/member_list.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/member/member_list.php" afterDir="false" />
 >>>>>>> 44dd5c06190d131f9044c884438f17964adf6c50
     </list>
+=======
+    <list default="true" id="48cbd7bd-d452-4e6c-8393-2e59c5407c82" name="Default Changelist" comment="" />
+>>>>>>> c82b32ca83c0d9ed6d8730bb8159b9446b1b96b5
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -30,7 +34,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/DB" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -52,8 +56,12 @@
 =======
       <workItem from="1681359886405" duration="73221000" />
       <workItem from="1683345354638" duration="1299000" />
+<<<<<<< HEAD
       <workItem from="1683443947139" duration="27286000" />
 >>>>>>> 44dd5c06190d131f9044c884438f17964adf6c50
+=======
+      <workItem from="1683443947139" duration="38524000" />
+>>>>>>> c82b32ca83c0d9ed6d8730bb8159b9446b1b96b5
     </task>
     <servers />
   </component>

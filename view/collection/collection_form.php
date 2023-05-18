@@ -21,25 +21,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Member</label>
                         <div class="col-sm-10">
-                            <select id="member_list" class="select2" style="width:260px">
-                                <optgroup label="Alaskan/Hawaiian Time Zone">
-                                    <option value="AK">Alaska</option>
-                                    <option value="HI">Hawaii</option>
-                                </optgroup>
-                                <optgroup label="Pacific Time Zone">
-                                    <option value="CA">California</option>
-                                    <option value="NV">Nevada</option>
-                                    <option value="OR">Oregon</option>
-                                    <option value="WA">Washington</option>
-                                </optgroup>
-                                <optgroup label="Mountain Time Zone">
-                                    <option value="AZ">Arizona</option>
-                                    <option value="CO">Colorado</option>
-                                    <option value="ID">Idaho</option>
-                                    <option value="MT">Montana</option>
-                                    <option value="NE">Nebraska</option>
-                                    <option value="NM">New Mexico</option>
-                                </optgroup>
+                            <select id="member_list" class="select2" style="width: 100%">
                             </select>
                         </div>
                     </div>
@@ -47,11 +29,29 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Month</label>
                         <div class="col-sm-4">
-                            <select data-required="true" class="form-control"> <option value="">Please choose Month</option> <option value="foo">Foo</option> <option value="bar">Bar</option> </select>
+                            <select data-required="true" class="form-control">
+                                <option value="">--Choose Month--</option>
+                                <option value="1">Jan</option>
+                                <option value="2">Feb</option>
+                                <option value="3">Mar</option>
+                                <option value="4">Apr</option>
+                                <option value="5">May</option>
+                                <option value="6">Jun</option>
+                                <option value="7">Jul</option>
+                                <option value="8">Aug</option>
+                                <option value="9">Sep</option>
+                                <option value="10">Oct</option>
+                                <option value="11">Nov</option>
+                                <option value="12">Dec</option>
+                            </select>
                         </div>
                         <label class="col-sm-2 control-label">Year</label>
                         <div class="col-sm-4">
-                            <select data-required="true" class="form-control"> <option value="">Please choose Year</option> <option value="foo">Foo</option> <option value="bar">Bar</option> </select>
+                            <select data-required="true" class="form-control">
+                                <option value="">--Choose Year--</option>
+                                <option value="2023">2023</option>
+                                <option value="2024">2024</option>
+                            </select>
                         </div>
                     </div>
 

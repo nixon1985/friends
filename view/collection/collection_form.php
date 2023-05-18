@@ -21,7 +21,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Member</label>
                         <div class="col-sm-10">
-                            <select id="member_list" class="select2" style="width: 100%">
+                            <select id="member_list" class="select2" name="member_id" style="width: 100%">
                             </select>
                         </div>
                     </div>
@@ -29,8 +29,8 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Month</label>
                         <div class="col-sm-4">
-                            <select data-required="true" class="form-control">
-                                <option value="">--Choose Month--</option>
+                            <select data-required="true" class="form-control" id="month_no" name="month_no">
+                                <option value="0">--Choose Month--</option>
                                 <option value="1">Jan</option>
                                 <option value="2">Feb</option>
                                 <option value="3">Mar</option>
@@ -47,8 +47,8 @@
                         </div>
                         <label class="col-sm-2 control-label">Year</label>
                         <div class="col-sm-4">
-                            <select data-required="true" class="form-control">
-                                <option value="">--Choose Year--</option>
+                            <select data-required="true" class="form-control" id="year_no" name="year_no">
+                                <option value="0">--Choose Year--</option>
                                 <option value="2023">2023</option>
                                 <option value="2024">2024</option>
                             </select>
@@ -58,36 +58,34 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Payment Type</label>
                         <div class="col-sm-4">
-                            <select data-required="true" class="form-control">
+                            <select data-required="true" class="form-control" id="paid_method" name="paid_method">
                                 <option value="">-- Choose Type --</option>
-                                <option value="bar">Cash</option>
-                                <option value="bar">Bank Check</option>
-                                <option value="foo">BKash</option>
-                                <option value="bar">Rocate</option>
-                                <option value="bar">Rocate</option>
+                                <option value="1">Cash</option>
+                                <option value="2">Bank Cheque</option>
+                                <option value="3">BKash</option>
+                                <option value="4">Rocate</option>
+                                <option value="5">Nogod</option>
                             </select>
                         </div>
 
                         <label class="col-sm-2 control-label">Ref No</label>
                         <div class="col-sm-4">
-                            <input type="email" class="form-control">
+                            <input type="text" class="form-control" id="ref_no" name="ref_no">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Amount</label>
                         <div class="col-sm-4">
-                            <input type="pament_amount" class="form-control">
+                            <input type="number" class="form-control" id="paid_amount" name="paid_amount">
                         </div>
-
-
                     </div>
 
                     <div class="line line-lg pull-in"></div>
                     <div class="form-group">
                         <div class="col-sm-10" align="center">
-                            <button type="#" class="btn btn-default">Cancel</button>
-                            <button type="submit" class="btn btn-primary">Save</button>
+                            <button type="button" id="resetBtn" class="btn btn-default">Cancel</button>
+                            <button type="submit" id="btnSubmit" class="btn btn-primary">Save</button>
                         </div>
                     </div>
 
@@ -106,7 +104,7 @@
                 <div class="panel-body">
 
                     <div class="table-responsive">
-                        <table id="member_grid" class="table table-striped b-t b-light">
+                        <table id="payment_grid" class="table table-striped b-t b-light">
                             <thead>
                             <tr>
                                 <th class="th-sortable" data-toggle="class">Collection ID</th>
@@ -144,11 +142,17 @@
         $('.select2').select2();
     });
 
+
+    $('#resetBtn').click(function(){
+        resetForm();
+    });
+
     loadDataGrid();
+    loadCollectionInfo();
     function loadDataGrid(){
         var postData = {actionType:'getAllMembers'};
         //$('.table tbody tr').remove();
-        var html = "";
+        var html = "<option value=''>-- Select Member --</option>";
         $.ajax({
             url: 'controller/infos.php',
             type: 'POST',
@@ -168,20 +172,55 @@
         $('#member_list').html(html);
     }
 
+    function resetForm(){
+        $("#member_list").select2("val","");
+        $('#submit_form')[0].reset();
+    }
+
+    function loadCollectionInfo(){
+        var postData = {actionType:'paymentInfo'};
+        //$('.table tbody tr').remove();
+        var html = "";
+        $.ajax({
+            url: 'controller/infos.php?actionType=paymentInfo',
+            type: 'POST',
+            data: JSON.stringify(postData),
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function(data) {
+                // $('#member_grid').html(data);
+                var result = JSON.parse(data);
+                $.each(result, function(i,data){
+                    html +="<tr>";
+                    html +="<td align='center' class='id'>"+data.collection_id+"</td>";
+                    html +="<td align='center' class='installment_no'>"+data.member_no+"</td>";
+                    html +="<td class='pay_type'>"+data.member_name+"</td>";
+                    html +="<td align='right' class='payable'>"+data.year_no+"</td>";
+                    html +="<td class='payment_date' align='center'>"+data.month_name+"</td>";
+                    html +="<td class='payment_date' align='right'>"+data.paid_amount+"</td>";
+                    html +='</tr>';
+                });
+            }
+        });
+        $('#payment_grid tbody').html(html);
+    }
+
     $("form#submit_form").submit(function(event) {
         //var gender = $('input[name="gender"]:checked').val();
 
-        if($.trim($('#member_name').val()).length==0 ){
-            alert('Please Enter Member Name');
+        if($.trim($('#month_no').val()).length==0 ){
+            alert('Please select month');
             return false;
-        }else if($.trim($('#phone_no').val()).length==0 ){
-            alert('Please Enter Phone Number');
+        }else if($.trim($('#year_no').val()).length==0 ){
+            alert('Please select year');
             return false;
-        }else if($.trim($('#monthly_payable').val()).length==0 ) {
-            alert('Please Enter monthly payable amount');
+        }else if($.trim($('#paid_method').val()).length==0 ) {
+            alert('Please Enter paid method');
             return false;
-        }else if($.trim($('#opening_balance').val()).length==0 ){
-            alert('Please Enter current balance');
+        }else if($.trim($('#paid_amount').val()).length==0 ){
+            alert('Please Enter paid amount');
             return false;
         } else {
 
@@ -189,9 +228,9 @@
             event.preventDefault();
             var formData = new FormData($(this)[0]);
             formData.append("action","insertOrUpdate");
-            formData.append("gender",gender);
+            //formData.append("gender",gender);
             $.ajax({
-                url: "../friends/controller/add_member_controller.php",
+                url: "../friends/controller/payment_collection_controller.php",
                 type: 'POST',
                 data: formData,
                 async: false,
@@ -199,17 +238,17 @@
                 contentType: false,
                 processData: false,
                 success: function(data) {
-                    //$('#btnSubmit').prop('disabled',false);
-
+                    $('#btnSubmit').prop('disabled',false);
                     var result = JSON.parse(data);
-
                     if (result.success) {
-                        document.getElementById("submit_form").reset();
-                        alert("New Member Created Successfully.");
+                        // document.getElementById("submit_form").reset();
+                        resetForm();
+                        loadCollectionInfo();
+                        alert("Paid Successfully.");
                     }
                     else if (result.error) {
                         //clearForm();
-                        alert("Salary Sheet Updated Successfully.");
+                        alert("Collection !! Error");
                     }
                 }
             });

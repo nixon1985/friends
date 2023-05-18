@@ -21,9 +21,15 @@ $conn       = $obj->getDbConn();
 //echo json_encode($row1);
 
 $actionType = '';
+/*
 if(isset($_POST['actionType'])){
     //echo $_POST['member_id'];
     $actionType = $_POST['actionType'];
+}
+*/
+
+if(isset($_REQUEST['actionType'])){
+    $actionType = $_REQUEST['actionType'];
 }
 
 
@@ -32,6 +38,15 @@ switch ($actionType){
     case 'personInfo':
         $member_id = $_POST['member_id'];
         $sql = "SELECT * FROM member_info WHERE member_id = $member_id";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        $opInfo = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        break;
+
+    case 'paymentInfo':
+        $sql = "SELECT p.collection_id, p.month_no, p.year_no, m.member_name, m.member_no, p.paid_amount, MONTHNAME(Concat(p.year_no,'-',p.month_no,'-',0)) month_name
+                FROM payment_collection p
+                JOIN member_info m ON m.member_id = p.member_id";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
         $opInfo = $stmt->fetchAll(PDO::FETCH_ASSOC);

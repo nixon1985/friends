@@ -76,7 +76,7 @@
                         </div>
                         <label class="col-sm-2 control-label">Collection Date</label>
                         <div class="col-sm-4">
-                            <input id="payment_date" class="input-sm datepicker-input form-control" type="text" value="" data-date-format="yyyy-mm-dd" >
+                            <input id="collection_date" name="collection_date" class="input-sm datepicker-input form-control" type="text" value="" data-date-format="yyyy-mm-dd" >
                         </div>
                     </div>
 
@@ -139,7 +139,7 @@
 <script>
     $(document).ready(function() {
         $('.select2').select2();
-        $( "#payment_date" ).datepicker();
+        $( "#collection_date" ).datepicker();
     });
 
 
@@ -217,14 +217,17 @@
             success: function(data) {
                 // $('#member_grid').html(data);
                 var result = JSON.parse(data);
+
+
                 $.each(result, function(i,data){
                     html +="<tr>";
                     html +="<td align='center' class='id'>"+data.collection_id+"</td>";
                     html +="<td align='center' class='installment_no'>"+data.member_no+"</td>";
                     html +="<td class='pay_type'>"+data.member_name+"</td>";
+                    html +="<td align='right' class='payable'>"+data.month_name+" "+data.year_no+"</td>";
                     html +="<td class='pay_type'>"+data.collection_date+"</td>";
-                    html +="<td align='right' class='payable'>"+data.year_no+"</td>";
                     html +="<td class='payment_date' align='center'>"+data.paid_method+"</td>";
+                    html +="<td class='payment_date' align='center'>"+data.ref_no+"</td>";
                     html +="<td class='payment_date' align='right'>"+data.paid_amount+"</td>";
                     html +='</tr>';
                 });

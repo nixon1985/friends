@@ -21,11 +21,10 @@ try {
     // $stmt->bindParam(':description', $description,PDO::PARAM_NULL);
     // $stmt->bindParam(':created_by', $created_by);
 
-    $member_id 	      = trim($_POST['member_id']);
+    $member_id 	          = trim($_POST['member_id']);
     $month_no 	  		  = trim($_POST['month_no']);
     $year_no 	      	  = trim($_POST['year_no']);
-    //$collection_date 	  = trim($_POST['collection_date']);
-    $collection_date 	  = date('Y-m-d');
+    $collection_date 	  = trim($_POST['collection_date']);
     $payable_amount 	  = trim($_POST['paid_amount']);
     $paid_method 	      = trim($_POST['paid_method']);
     $ref_no 	          = (!empty($_POST['ref_no'])) ? trim($_POST['ref_no']):null;

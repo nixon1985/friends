@@ -42,15 +42,17 @@ switch ($actionType){
         $stmt->execute();
         $opInfo = $stmt->fetchAll(PDO::FETCH_ASSOC);
         break;
+
     case 'getPaymentMethod':
         $sql = "SELECT * FROM payment_method";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
         $opInfo = $stmt->fetchAll(PDO::FETCH_ASSOC);
         break;
+
     case 'paymentInfo':
         $sql = "SELECT p.collection_id, p.month_no, p.year_no, m.member_name, m.member_no, p.paid_amount, 
-                MONTHNAME(Concat(p.year_no,'-',p.month_no,'-',0)) month_name, t.paid_method, 
+                MONTHNAME(Concat(p.year_no,'-',p.month_no,'-',0)) month_name, t.paid_method, p.collection_date, p.ref_no 
                 FROM payment_collection p
                 JOIN member_info m ON m.member_id = p.member_id
                 JOIN payment_method t ON t.paid_method_id = p.paid_method";

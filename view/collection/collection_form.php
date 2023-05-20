@@ -59,12 +59,7 @@
                         <label class="col-sm-2 control-label">Payment Type</label>
                         <div class="col-sm-4">
                             <select data-required="true" class="form-control" id="paid_method" name="paid_method">
-                                <option value="">-- Choose Type --</option>
-                                <option value="1">Cash</option>
-                                <option value="2">Bank Cheque</option>
-                                <option value="3">BKash</option>
-                                <option value="4">Rocate</option>
-                                <option value="5">Nogod</option>
+
                             </select>
                         </div>
 
@@ -78,6 +73,10 @@
                         <label class="col-sm-2 control-label">Amount</label>
                         <div class="col-sm-4">
                             <input type="number" class="form-control" id="paid_amount" name="paid_amount">
+                        </div>
+                        <label class="col-sm-2 control-label">Collection Date</label>
+                        <div class="col-sm-4">
+                            <input id="payment_date" class="input-sm datepicker-input form-control" type="text" value="" data-date-format="yyyy-mm-dd" >
                         </div>
                     </div>
 
@@ -108,13 +107,13 @@
                             <thead>
                             <tr>
                                 <th class="th-sortable" data-toggle="class">Collection ID</th>
-                                <th>Date</th>
                                 <th>Member Id</th>
                                 <th>Member Name</th>
+                                <th>Instalment</th>
+                                <th>Date</th>
                                 <th>Collection Type</th>
                                 <th>Ref No</th>
                                 <th>Collection Amount</th>
-                                <th></th>
                             </tr>
                             </thead>
                             <tbody></tbody>
@@ -140,6 +139,7 @@
 <script>
     $(document).ready(function() {
         $('.select2').select2();
+        $( "#payment_date" ).datepicker();
     });
 
 
@@ -149,6 +149,7 @@
 
     loadDataGrid();
     loadCollectionInfo();
+    getPaymentMethod();
     function loadDataGrid(){
         var postData = {actionType:'getAllMembers'};
         //$('.table tbody tr').remove();
@@ -170,6 +171,30 @@
             }
         });
         $('#member_list').html(html);
+    }
+
+
+    function getPaymentMethod(){
+        var postData = {actionType:'getAllMembers'};
+        //$('.table tbody tr').remove();
+        var html = "<option value=''>-- Select Method --</option>";
+        $.ajax({
+            url: 'controller/infos.php?actionType=getPaymentMethod',
+            type: 'POST',
+            data: JSON.stringify(postData),
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function(data) {
+                // $('#member_grid').html(data);
+                var result = JSON.parse(data);
+                $.each(result, function(i,data){
+                    html +="<option value='"+data.paid_method_id+"'>"+data.paid_method+"</option>";
+                });
+            }
+        });
+        $('#paid_method').html(html);
     }
 
     function resetForm(){
@@ -197,8 +222,9 @@
                     html +="<td align='center' class='id'>"+data.collection_id+"</td>";
                     html +="<td align='center' class='installment_no'>"+data.member_no+"</td>";
                     html +="<td class='pay_type'>"+data.member_name+"</td>";
+                    html +="<td class='pay_type'>"+data.collection_date+"</td>";
                     html +="<td align='right' class='payable'>"+data.year_no+"</td>";
-                    html +="<td class='payment_date' align='center'>"+data.month_name+"</td>";
+                    html +="<td class='payment_date' align='center'>"+data.paid_method+"</td>";
                     html +="<td class='payment_date' align='right'>"+data.paid_amount+"</td>";
                     html +='</tr>';
                 });

@@ -65,7 +65,6 @@ if(!isset($_SESSION['user_id']) && $_SESSION['user_id'] == true) {
 			<section id="content"> 
 				<section class="vbox"> 
 					<section class="scrollable padder" id="inner_page_content">
-                        <input class="input-sm input-s datepicker-input form-control" size="16" type="text" value="12-02-2013" data-date-format="dd-mm-yyyy" >
 
 					</section> 
 				</section> 

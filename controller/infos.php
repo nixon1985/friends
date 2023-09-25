@@ -61,6 +61,17 @@ switch ($actionType){
         $opInfo = $stmt->fetchAll(PDO::FETCH_ASSOC);
         break;
 
+    case 'balanceInfo':
+        $sql = "SELECT m.member_no, m.member_name, SUM(p.paid_amount) deposited_amount 
+        FROM payment_collection p
+        JOIN member_info m ON m.member_id = p.member_id
+        GROUP BY m.member_id
+        ORDER BY member_no";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        $opInfo = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        break;
+
     default:
         $sql = "SELECT * FROM member_info";
         $stmt = $conn->prepare($sql);

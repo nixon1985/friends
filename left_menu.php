@@ -91,8 +91,9 @@
 								</span> 
 								<span>Reports</span> 
 							</a> 
-							<ul class="nav lt"> 
-								<li class="active"><a href="buttons.html" class="active"> <i class="fa fa-angle-right"></i> <span>Report-1</span> </a> </li>
+							<ul class="nav lt">
+                                <li> <a href="#" onclick='openpage("view/reports/balance_reports.php");' > <i class="fa fa-angle-right"></i> <span>Balance Report</span> </a> </li>
+								<li><a href="buttons.html" class="active"> <i class="fa fa-angle-right"></i> <span>Report-1</span> </a> </li>
 								<li > <a href="icons.html" > <i class="fa fa-angle-right"></i> <span>Report-2</span> </a> </li>  
 							</ul> 
 						</li> 

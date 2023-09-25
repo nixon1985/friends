@@ -204,7 +204,7 @@
 <script type="text/javascript">
 
 $(document).ready(function(){
-	var userList	= "";
+	var userList = "";
 	jQuery.ajaxSetup({
 		beforeSend: function() {
 			$('#wait').show();
@@ -346,7 +346,7 @@ $(document).ready(function(){
 		
 	});
 		
-	clearForm();
+	//clearForm();
 });
 
 

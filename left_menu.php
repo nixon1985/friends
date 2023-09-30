@@ -92,31 +92,11 @@
 								<span>Reports</span> 
 							</a> 
 							<ul class="nav lt">
-                                <li> <a href="#" onclick='openpage("view/reports/balance_reports.php");' > <i class="fa fa-angle-right"></i> <span>Balance Report</span> </a> </li>
-								<li><a href="buttons.html" class="active"> <i class="fa fa-angle-right"></i> <span>Report-1</span> </a> </li>
+                                <li> <a href="#" onclick='openpage("view/reports/balance_reports.php");'> <i class="fa fa-angle-right"></i> <span>Balance Report</span> </a> </li>
+								<li><a href="#" onclick='openpage("view/reports/deposited_reports.php");'> <i class="fa fa-angle-right"></i> <span>Deposited Report</span> </a> </li>
 								<li > <a href="icons.html" > <i class="fa fa-angle-right"></i> <span>Report-2</span> </a> </li>  
 							</ul> 
-						</li> 
-						<li > 
-							<a href="#pages" > <i class="fa fa-file-text icon"> <b class="bg-primary"></b> </i> 
-								<span class="pull-right"> <i class="fa fa-angle-down text"></i> <i class="fa fa-angle-up text-active"></i> </span> 
-								<span>Pages</span> 
-							</a> 
-							<ul class="nav lt"> 
-								<li > <a href="gallery.html" > <i class="fa fa-angle-right"></i> <span>Gallery</span> </a> </li> 
-								<li > <a href="profile.html" > <i class="fa fa-angle-right"></i> <span>Profile</span> </a> </li> 
-								<li > <a href="invoice.html" > <i class="fa fa-angle-right"></i> <span>Invoice</span> </a> </li> 
-								<li > <a href="intro.html" > <i class="fa fa-angle-right"></i> <span>Intro</span> </a> </li> 
-								<li > <a href="master.html" > <i class="fa fa-angle-right"></i> <span>Master</span> </a> </li> 
-								<li > <a href="gmap.html" > <i class="fa fa-angle-right"></i> <span>Google Map</span> </a> </li> 
-								<li > <a href="jvectormap.html" > <i class="fa fa-angle-right"></i> <span>Vector Map</span> </a> </li> 
-								<li > <a href="signin.html" > <i class="fa fa-angle-right"></i> <span>Signin</span> </a> </li> 
-								<li > <a href="signup.html" > <i class="fa fa-angle-right"></i> <span>Signup</span> </a> </li> 
-								<li > <a href="404.html" > <i class="fa fa-angle-right"></i> <span>404</span> </a> </li> 
-							</ul> 
-						</li> 
-						<li > <a href="mail.html" > <b class="badge bg-danger pull-right">3</b> <i class="fa fa-envelope-o icon"> <b class="bg-primary dker"></b> </i> <span>Message</span> </a> </li> 
-						<li > <a href="notebook.html" > <i class="fa fa-pencil icon"> <b class="bg-info"></b> </i> <span>Notes</span> </a> </li> 
+						</li>
 					</ul> 
 				</nav> <!-- / nav --> 
 			</div> 

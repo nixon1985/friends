@@ -68,21 +68,17 @@
 <script>
     $(document).ready(function() {
         $("#member_list").select2();
-        $("#member_list").on('select2:select', function (e) {
-            alert(e);
+        $('#member_list').on('change', function() {
+            var memberID = $(this).val();
+            loadDepositedHistory(memberID);
         });
     });
 
 
 
+    loadMemberCombobox();
 
-    $('#resetBtn').click(function(){
-        resetForm();
-    });
-
-    loadDataGrid();
-    loadCollectionInfo();
-    function loadDataGrid(){
+    function loadMemberCombobox(){
         var postData = {actionType:'getAllMembers'};
         //$('.table tbody tr').remove();
         var html = "<option value=''>-- Select Member --</option>";
@@ -106,7 +102,7 @@
     }
 
 
-    function loadCollectionInfo(){
+    function loadDepositedHistory(memberID){
         var postData = {actionType:'paymentInfo'};
         //$('.table tbody tr').remove();
         var html = "";
@@ -136,55 +132,6 @@
         $('#balance_grid tbody').html(html);
     }
 
-    $("form#submit_form").submit(function(event) {
-        //var gender = $('input[name="gender"]:checked').val();
-
-        if($.trim($('#month_no').val()).length==0 ){
-            alert('Please select month');
-            return false;
-        }else if($.trim($('#year_no').val()).length==0 ){
-            alert('Please select year');
-            return false;
-        }else if($.trim($('#paid_method').val()).length==0 ) {
-            alert('Please Enter paid method');
-            return false;
-        }else if($.trim($('#paid_amount').val()).length==0 ){
-            alert('Please Enter paid amount');
-            return false;
-        } else {
-
-            $('#btnSubmit').prop('disabled',true);
-            event.preventDefault();
-            var formData = new FormData($(this)[0]);
-            formData.append("action","insertOrUpdate");
-            //formData.append("gender",gender);
-            $.ajax({
-                url: "../friends/controller/payment_collection_controller.php",
-                type: 'POST',
-                data: formData,
-                async: false,
-                cache: false,
-                contentType: false,
-                processData: false,
-                success: function(data) {
-                    $('#btnSubmit').prop('disabled',false);
-                    var result = JSON.parse(data);
-                    if (result.success) {
-                        // document.getElementById("submit_form").reset();
-                        resetForm();
-                        loadCollectionInfo();
-                        alert("Paid Successfully.");
-                    }
-                    else if (result.error) {
-                        //clearForm();
-                        alert("Collection !! Error");
-                    }
-                }
-            });
-            return false;
-        }
-
-    });
 </script>
 
 

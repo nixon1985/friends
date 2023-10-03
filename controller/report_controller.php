@@ -9,16 +9,15 @@ if(isset($_REQUEST['actionType'])){
     $actionType = $_REQUEST['actionType'];
 }
 
-
 switch ($actionType){
 
     case 'depositedHistory':
-        $member_id = $_POST['member_id'];
+        $member_id = $_GET['member_id'];
         $sql = "SELECT p.collection_date deposited_date, p.collection_id transaction_id, 
-MONTHNAME(p.month_no)month_name,p.year_no,  p.paid_amount deposited_amount 
-FROM payment_collection p
-JOIN payment_method m ON p.paid_method = m.paid_method_id
-ORDER BY p.collection_date desc";
+                MONTHNAME(p.month_no)month_name,p.year_no, m.paid_method, p.ref_no, p.paid_amount deposited_amount 
+                FROM payment_collection p
+                JOIN payment_method m ON p.paid_method = m.paid_method_id
+                ORDER BY p.collection_date desc";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
         $opInfo = $stmt->fetchAll(PDO::FETCH_ASSOC);

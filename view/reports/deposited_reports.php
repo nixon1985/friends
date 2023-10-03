@@ -42,7 +42,9 @@
                         <thead>
                         <tr>
                             <th>Deposited Date</th>
+                            <th>Month</th>
                             <th>Payment Method</th>
+                            <th>Ref No.</th>
                             <th align="right">Deposited Amount</th>
                         </tr>
                         </thead>
@@ -103,12 +105,13 @@
 
 
     function loadDepositedHistory(memberID){
-        var postData = {actionType:'paymentInfo'};
+        var postData = {actionType:'depositedHistory',member_id:memberID};
+        // var postData = "actionType=depositedHistory && member_id="+memberID;
         //$('.table tbody tr').remove();
         var html = "";
         $.ajax({
-            url: 'controller/infos.php?actionType=balanceInfo',
-            type: 'POST',
+            url: 'controller/report_controller.php?actionType=depositedHistory&& member_id='+memberID,
+            method: 'POST',
             data: JSON.stringify(postData),
             async: false,
             cache: false,
@@ -120,8 +123,10 @@
                 var result = JSON.parse(data);
                 $.each(result, function(i,data){
                     html +="<tr>";
-                    html +="<td align='center' class='installment_no'>"+data.member_no+"</td>";
-                    html +="<td class='pay_type'>"+data.member_name+"</td>";
+                    html +="<td align='center' class='installment_no'>"+data.deposited_date+"</td>";
+                    html +="<td class='pay_type'>"+data.month_name+"</td>";
+                    html +="<td class='pay_type'>"+data.paid_method+"</td>";
+                    html +="<td class='pay_type'>"+data.ref_no+"</td>";
                     html +="<td class='pay_type' align='right'>"+data.deposited_amount+"</td>";
                     html +='</tr>';
                     balanceAmount += parseInt(data.deposited_amount);

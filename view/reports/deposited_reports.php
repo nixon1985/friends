@@ -105,12 +105,12 @@
 
 
     function loadDepositedHistory(memberID){
-        var postData = {actionType:'depositedHistory',member_id:memberID};
+        var postData = {member_id:memberID};
         // var postData = "actionType=depositedHistory && member_id="+memberID;
         //$('.table tbody tr').remove();
         var html = "";
         $.ajax({
-            url: 'controller/report_controller.php?actionType=depositedHistory&& member_id='+memberID,
+            url: 'controller/report_controller.php?actionType=depositedHistory',
             method: 'POST',
             data: JSON.stringify(postData),
             async: false,

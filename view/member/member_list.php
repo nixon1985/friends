@@ -117,59 +117,7 @@
                                 </div>
                             </section>
                         </div>
-
-                        <!--<div class="col-sm-12">
-                            <section class="panel panel-default form-horizontal">
-                                <header class="panel-heading font-bold">Nominee information</header>
-                                <div class="panel-body">
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">Name</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control">
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">Phone</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control">
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">Email</label>
-                                        <div class="col-sm-10">
-                                            <input type="email" class="form-control">
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">Present address</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control">
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">Permanent address</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control">
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">Relation with Nominee</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control">
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </section>
-                        </div>-->
                     </div>
-
-
 
 
                     <section class="panel panel-default form-horizontal">
@@ -210,11 +158,61 @@
 
 
 <script type="text/javascript">
-/*
+
 	$(document).ready(function(){
-		loadDataGrid();
-	});
-*/
+        $("form#submit_form").submit(function(event) {
+            var gender = $('input[name="gender"]:checked').val();
+
+            if($.trim($('#member_name').val()).length==0 ){
+                alert('Please Enter Member Name');
+                return false;
+            }else if($.trim($('#phone_no').val()).length==0 ){
+                alert('Please Enter Phone Number');
+                return false;
+            }else if($.trim($('#monthly_payable').val()).length==0 ) {
+                alert('Please Enter monthly payable amount');
+                return false;
+            }else if($.trim($('#opening_balance').val()).length==0 ){
+                alert('Please Enter current balance');
+                return false;
+            } else {
+
+                $('#btnSubmit').prop('disabled',true);
+                event.preventDefault();
+                var formData = new FormData($(this)[0]);
+                formData.append("action","insertOrUpdate");
+                formData.append("gender",gender);
+                formData.append("memberID",memberIdForEdit);
+                $.ajax({
+                    url: "../friends/controller/add_member_controller.php",
+                    type: 'POST',
+                    data: formData,
+                    async: false,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: function(data) {
+                        //$('#btnSubmit').prop('disabled',false);
+
+                        var result = JSON.parse(data);
+
+                        if (result.success) {
+                            document.getElementById("submit_form").reset();
+                            alert("New Member Created Successfully.");
+                        }
+                        else if (result.error) {
+                            //clearForm();
+                            alert("Salary Sheet Updated Successfully.");
+                        }
+                    }
+                });
+                return false;
+            }
+
+        });
+
+    });
+    var memberIdForEdit = 0;
     loadDataGrid();
 	function loadDataGrid(){
         var postData = {actionType:'getAllMembers'};
@@ -249,10 +247,10 @@
 	}
 
 	function editMember(memberID){
-
+        memberIdForEdit = memberID;
         $.post("controller/infos.php", {actionType: "personInfo", member_id: memberID}, function(data, status){
             var result = JSON.parse(data);
-            alert(data);
+            //alert(data);
             $('#member_name').val(result[0].member_name);
             $('#phone_no').val(result[0].phone_no);
             $('#email').val(result[0].email);
@@ -273,27 +271,6 @@
             $('#modal-form').modal('show');
         });
 
-
-        /*
-        $.ajax({
-            url: 'controller/infos.php',
-            type: 'POST',
-            data: data,
-            dataType: "json",
-            async: false,
-            cache: false,
-            contentType: "application/json; charset=utf-8",
-            processData: false,
-            success: function(data) {
-                var result = JSON.parse(data);
-                $.each(result, function(i,data){
-
-                });
-            }
-        });
-        */
-
-       // $('#modal-form').modal('show');
     }
 	
 

@@ -30,7 +30,8 @@
                                 <?php } ?>
 								<li> <a href="#" onclick='openpage("view/member/member_list.php");'> <i class="fa fa-angle-right"></i> <span>Member List</span> </a> </li> 
 							</ul> 
-						</li> 
+						</li>
+                        <?php if($_SESSION['user_level']=='ADMIN'){ ?>
 						<li > 
 							<a href="#layout" > 
 								<i class="fa fa-columns icon"> <b class="bg-warning"></b> </i> 
@@ -42,12 +43,11 @@
 							</a> 
 							<ul class="nav lt"> 
 								<li > <a href="#" onclick='openpage("view/collection/collection_form.php");' > <i class="fa fa-angle-right"></i> <span>Payment Collection</span> </a> </li> 
-								<li > <a href="#" onclick='openpage("controller/infos.php");' > <i class="fa fa-angle-right"></i> <span>Collection List</span> </a> </li> 
-								<li > <a href="layout-h.html" > <i class="fa fa-angle-right"></i> <span>Due List</span> </a> </li> 
+								<li > <a href="#" onclick='openpage("controller/infos.php");' > <i class="fa fa-angle-right"></i> <span>Collection List</span> </a> </li>
 							</ul> 
 						</li>
-
-
+                        <?php } ?>
+                        <!--
 						<li> 
 							<a href="#layout" > 
 								<i class="fa fa-columns icon"> <b class="bg-warning"></b> </i> 
@@ -64,6 +64,7 @@
 							</ul> 
 						</li>
 
+
 						<li> 
 							<a href="#layout" > 
 								<i class="fa fa-columns icon"> <b class="bg-warning"></b> </i> 
@@ -78,7 +79,7 @@
 								<li > <a href="layout-c.html" > <i class="fa fa-angle-right"></i> <span>Expense List</span> </a> </li> 
 							</ul> 
 						</li>						
-						
+						-->
 						
 						
 						

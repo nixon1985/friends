@@ -7,8 +7,14 @@ $newMemberNo = $obj->getNewMemberNo();
 try {
         $photoPath = photo_uplaod($newMemberNo);
         $conn->beginTransaction();
-		$sql_query = "INSERT INTO member_info (member_no,member_name,phone_no,email,gender,present_address,permanent_address,monthly_payable,opening_balance,photo_path) 
+        if($_POST['']==0){
+            $sql_query = "INSERT INTO member_info (member_no,member_name,phone_no,email,gender,present_address,permanent_address,monthly_payable,opening_balance,photo_path) 
                                        VALUES (:member_no,:member_name,:phone_no,:email,:gender,:present_address,:permanent_address,:monthly_payable,:opening_balance,:photo_path)";
+        }else{
+            $sql_query = "UPDATE member_info SET member_name=:member_name,phone_no=:phone_no,email=:email,gender=:gender,present_address=:present_address,permanent_address=:permanent_address,monthly_payable=:monthly_payable,opening_balance=:opening_balance,photo_path=:photo_path WHERE member_no =:member_no";
+
+        }
+
 		$stmt = $conn->prepare($sql_query);
 
         $stmt->bindParam(':member_no', $newMemberNo);

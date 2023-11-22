@@ -7,17 +7,20 @@ $newMemberNo = $obj->getNewMemberNo();
 try {
         $photoPath = photo_uplaod($newMemberNo);
         $conn->beginTransaction();
-        if($_POST['']==0){
+		
+        if($_POST['memberID']==0){
             $sql_query = "INSERT INTO member_info (member_no,member_name,phone_no,email,gender,present_address,permanent_address,monthly_payable,opening_balance,photo_path) 
-                                       VALUES (:member_no,:member_name,:phone_no,:email,:gender,:present_address,:permanent_address,:monthly_payable,:opening_balance,:photo_path)";
+                        VALUES (:member_no,:member_name,:phone_no,:email,:gender,:present_address,:permanent_address,:monthly_payable,:opening_balance,:photo_path)";
         }else{
-            $sql_query = "UPDATE member_info SET member_name=:member_name,phone_no=:phone_no,email=:email,gender=:gender,present_address=:present_address,permanent_address=:permanent_address,monthly_payable=:monthly_payable,opening_balance=:opening_balance,photo_path=:photo_path WHERE member_no =:member_no";
-
+			
+			$memberID = $_POST['memberID'];
+            $sql_query = "UPDATE member_info SET member_name=:member_name,phone_no=:phone_no,email=:email,gender=:gender,present_address=:present_address,permanent_address=:permanent_address,monthly_payable=:monthly_payable,opening_balance=:opening_balance,photo_path=:photo_path WHERE member_id =$memberID";
         }
 
 		$stmt = $conn->prepare($sql_query);
-
-        $stmt->bindParam(':member_no', $newMemberNo);
+		if($_POST['memberID']==0){
+			$stmt->bindParam(':member_no', $newMemberNo);
+		}
 		$stmt->bindParam(':member_name', $member_name);
 		$stmt->bindParam(':phone_no', $phone_no);
 		$stmt->bindParam(':email', $email);
@@ -42,8 +45,16 @@ try {
 		
 		$stmt->execute();
 		$conn->commit();
-        userCreate($newMemberNo,$conn);
-		$data['success']='New Member added successfully';
+        
+		
+		if($_POST['memberID']==0){
+            userCreate($newMemberNo,$conn);
+			$data['success']='New Member added successfully';
+        }else{
+			$data['success']='Updated successfully';
+		}
+		
+		
         echo json_encode($data);
 
 	} catch(PDOException $e) {
